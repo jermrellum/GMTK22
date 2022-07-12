@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private GameObject canvas;
-    [SerializeField] private GameObject button;
+   // [SerializeField] private GameObject canvas;
+   // [SerializeField] private GameObject button;
 
     private new Renderer renderer;
 
@@ -33,10 +33,10 @@ public class Tile : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            GameObject newCanvas = Instantiate(canvas) as GameObject;
-            GameObject newButton = Instantiate(button) as GameObject;
-            newButton.transform.SetParent(newCanvas.transform, false);
-            newButton.transform.position = Input.mousePosition;
+         //   GameObject newCanvas = Instantiate(canvas) as GameObject;
+        //    GameObject newButton = Instantiate(button) as GameObject;
+         //   newButton.transform.SetParent(newCanvas.transform, false);
+        //    newButton.transform.position = Input.mousePosition;
         }
 
     }
