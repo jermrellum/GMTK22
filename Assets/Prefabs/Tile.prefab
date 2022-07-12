@@ -110,3 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce80fc7370b63e9408242b7b2b7c595e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1463296257995715184, guid: 257d021695dc2d34a89814cf16e22081, type: 3}
+  button: {fileID: 2318721639830959916, guid: 783907e84ff92804a98d2b21842553d0, type: 3}
