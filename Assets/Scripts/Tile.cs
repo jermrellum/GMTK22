@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    private new Renderer renderer;
+
     void Start()
+    {
+        renderer = GetComponent<Renderer>();
+    }
+
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseEnter()
     {
-        
+        renderer.material.color = Color.yellow;
+    }
+
+    private void OnMouseExit()
+    {
+        renderer.material.color = Color.white;
     }
 }
