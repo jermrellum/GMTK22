@@ -9,6 +9,7 @@ public class WaterSource : MonoBehaviour
     [SerializeField] private int framesPerWaterTick = 30;
     [SerializeField] private int directionOfFlow = 1; // 0 = north, 1 = east, 2 = south, 3 = west
     [HideInInspector] public int waterAmount;
+    [HideInInspector] public int waterReserve;
     public int tileX = 0;
     public int tileY = 10;
 
@@ -18,13 +19,16 @@ public class WaterSource : MonoBehaviour
     private int gh;
 
     private GridManager gm;
+    private GameController gc;
 
     private void Awake()
     {
         gm = GetComponentInParent<GridManager>();
+        gc = GetComponentInParent<GameController>();
         gw = gm.gridWidth;
         gh = gm.gridHeight;
         waterAmount = waterAmountStart;
+        waterReserve = 0;
     }
 
     private void Start()
@@ -34,6 +38,11 @@ public class WaterSource : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(gc.isDay)
+        {
+            return;
+        }
+
         if(tickCounter == framesPerWaterTick)
         {
             waterTick();
@@ -89,6 +98,10 @@ public class WaterSource : MonoBehaviour
 
             if (waterAmount <= 0)
             {
+                if(waterReserve > 0)
+                {
+                    break;
+                }
                 gm.gridValues[tileX, tileY] = 0;
                 Destroy(this.gameObject);
                 break; //idt it can even reach here, but just in case
@@ -98,6 +111,15 @@ public class WaterSource : MonoBehaviour
                 setWaterHeight();
             }
         }
+
+        emptyReserve();
+        
+    }
+
+    private void emptyReserve()
+    {
+        waterAmount += waterReserve;
+        waterReserve = 0;
     }
 
     private void setWaterHeight()
@@ -130,7 +152,7 @@ public class WaterSource : MonoBehaviour
             GameObject tilego = GameObject.Find("Tile " + tx + " " + ty);
             WaterSource tileWater = tilego.GetComponentInChildren<WaterSource>();
             int half = waterAmount - (waterAmount / 2);
-            tileWater.waterAmount += half;
+            tileWater.waterReserve += half;
 
             return half;
         }

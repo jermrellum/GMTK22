@@ -62,10 +62,10 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
                     switch(buildType)
                     {
-                        case 1:
+                        case 3:
                             nCon.transform.rotation = Quaternion.Euler(270.0f, 0.0f, 90.0f);
                             break;
-                        case 2:
+                        case 4:
                             nCon.transform.rotation = Quaternion.Euler(270.0f, 0.0f, 0.0f);
                             break;
                     }

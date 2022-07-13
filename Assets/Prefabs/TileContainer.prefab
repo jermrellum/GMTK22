@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: ece7deca8b517e64c9bfae9dd8285dd2, type: 3}
-  conFab: {fileID: 7192356363580474305, guid: 9b017bab9ceeb8041b709e244f6dd5b3, type: 3}
+  conFab: {fileID: 9219635656523518991, guid: f75f5846694b1c94c9be45bff1949dcf, type: 3}
   buildType: 2
 --- !u!1 &3774123156478317798
 GameObject:
