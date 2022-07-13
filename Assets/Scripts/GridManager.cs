@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private int gridWidth;
-    [SerializeField] private int gridHeight;
+    public int gridWidth;
+    public int gridHeight;
     [SerializeField] private GameObject tilePrefab;
 
-    private int tileSize = 2;
+    [HideInInspector] public int tileSize = 2;
 
     void Start()
     {
@@ -21,9 +21,12 @@ public class GridManager : MonoBehaviour
         {
             for(int j=0; j<gridHeight; j++)
             {
-                var nTile = Instantiate(tilePrefab, new Vector3(i*tileSize, 0, j*tileSize), Quaternion.identity);
-                nTile.transform.parent = gameObject.transform;
-                nTile.name = $"Tile {i} {j}";
+                var nTileCont = Instantiate(tilePrefab, new Vector3(i*tileSize, 0, j*tileSize), Quaternion.identity);
+                nTileCont.transform.parent = gameObject.transform;
+                nTileCont.name = $"Tile {i} {j}";
+                Tile nTile = nTileCont.GetComponentInChildren<Tile>();
+                nTile.tileX = i;
+                nTile.tileY = j;
             }
         }
     }

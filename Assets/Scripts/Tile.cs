@@ -7,6 +7,9 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject contextPanel;
     [SerializeField] private GameObject menuPanel;
 
+    [HideInInspector] public int tileX;
+    [HideInInspector] public int tileY;
+
     private new Renderer renderer;
     private GameController gc;
 
@@ -14,11 +17,6 @@ public class Tile : MonoBehaviour
     {
         renderer = GetComponent<Renderer>();
         gc = GetComponentInParent<GameController>();
-    }
-
-    void Update()
-    {
-        
     }
 
     private void OnMouseEnter()

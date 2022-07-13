@@ -26,14 +26,46 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             if (Input.GetMouseButtonDown(0))
             {
-                var nCon = Instantiate(conFab, new Vector3(tile.transform.position.x + 0.25f, 0, tile.transform.position.z - 0.15f), conFab.transform.rotation, tile.transform.parent.transform);
-                nCon.transform.localScale = conFab.transform.localScale;
-                nCon.name = "Construct on " + nCon.transform.parent.name;
+                int moneyAmt = 0;
+                Vector3 v3 = Vector3.zero; //displacement vector
 
-                switch(buildType)
+                switch (buildType)  //0 = building, 1 = vert wall, 2 = horiz wall
                 {
-                    case 0: gc.money -= 100; break;
-                    case 1: gc.money -= 50; break;
+                    case 0: 
+                        moneyAmt = 100;
+                        v3 = new Vector3(0.25f, 0.0f, -0.15f);
+                        break;
+                    case 1:
+                        moneyAmt = 50;
+                        v3 = new Vector3(0.0f, 0.4f, 0.0f);
+                        break;
+                    case 2: 
+                        moneyAmt = 50;
+                        v3 = new Vector3(0.0f, 0.4f, 0.0f);
+                        break;
+                }
+
+                if (gc.money >= moneyAmt)
+                {
+                    var nCon = Instantiate(conFab, new Vector3(tile.transform.position.x + v3.x, v3.y, tile.transform.position.z + v3.z), 
+                        conFab.transform.rotation, tile.transform.parent.transform);
+                    nCon.transform.localScale = conFab.transform.localScale;
+                    nCon.name = "Construct on " + nCon.transform.parent.name;
+                    gc.money -= moneyAmt;
+
+                    switch(buildType)
+                    {
+                        case 1:
+                            nCon.transform.rotation = Quaternion.Euler(270.0f, 0.0f, 90.0f);
+                            break;
+                        case 2:
+                            nCon.transform.rotation = Quaternion.Euler(270.0f, 0.0f, 0.0f);
+                            break;
+                    }
+                }
+                else
+                {
+                    Debug.Log("No money");
                 }
 
                 tile.hidePanel();
