@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-   // [SerializeField] private GameObject canvas;
-   // [SerializeField] private GameObject button;
+    [SerializeField] private GameObject contextPanel;
+    [SerializeField] private GameObject menuPanel;
 
     private new Renderer renderer;
+    private GameController gc;
 
     void Start()
     {
         renderer = GetComponent<Renderer>();
+        gc = GetComponentInParent<GameController>();
     }
 
     void Update()
@@ -21,11 +23,24 @@ public class Tile : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        renderer.material.color = Color.yellow;
+        if (!gc.contextMenuShowing)
+        {
+            renderer.material.color = Color.yellow;
+        }
     }
 
     private void OnMouseExit()
     {
+        if (!gc.contextMenuShowing)
+        {
+            renderer.material.color = Color.white;
+        }
+    }
+    public void hidePanel()
+    {
+        contextPanel.SetActive(false);
+        gc.contextMenuShowing = false;
+        gc.hoveringOnButton = false;
         renderer.material.color = Color.white;
     }
 
@@ -33,10 +48,13 @@ public class Tile : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-         //   GameObject newCanvas = Instantiate(canvas) as GameObject;
-        //    GameObject newButton = Instantiate(button) as GameObject;
-         //   newButton.transform.SetParent(newCanvas.transform, false);
-        //    newButton.transform.position = Input.mousePosition;
+            if (!gc.contextMenuShowing)
+            {
+                contextPanel.SetActive(true);
+                gc.contextMenuShowing = true;
+                gc.hoveringOnButton = true;
+                menuPanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            }
         }
 
     }

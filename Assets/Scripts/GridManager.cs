@@ -6,7 +6,7 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] private int gridWidth;
     [SerializeField] private int gridHeight;
-    [SerializeField] private Tile tilePrefab;
+    [SerializeField] private GameObject tilePrefab;
 
     private int tileSize = 2;
 
@@ -22,6 +22,7 @@ public class GridManager : MonoBehaviour
             for(int j=0; j<gridHeight; j++)
             {
                 var nTile = Instantiate(tilePrefab, new Vector3(i*tileSize, 0, j*tileSize), Quaternion.identity);
+                nTile.transform.parent = gameObject.transform;
                 nTile.name = $"Tile {i} {j}";
             }
         }
