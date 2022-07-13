@@ -7,6 +7,7 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     public Texture2D cursorTexture;
     private GameController gc;
+    private GridManager gm;
     private CursorMode cursorMode = CursorMode.Auto;
     private Vector2 hotSpot = new Vector2(6.0f, 0.0f);
     private bool hoveringOnThis = false;
@@ -19,6 +20,7 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         gc = GetComponentInParent<GameController>();
         tile = GetComponentInParent<Tile>();
+        gm = GetComponentInParent<GridManager>();
     }
     private void Update()
     {
@@ -28,20 +30,24 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             {
                 int moneyAmt = 0;
                 Vector3 v3 = Vector3.zero; //displacement vector
+                string conName = "";
 
-                switch (buildType)  //0 = building, 1 = vert wall, 2 = horiz wall
+                switch (buildType)  //2 = building, 3 = vert wall, 4 = horiz wall
                 {
-                    case 0: 
-                        moneyAmt = 100;
-                        v3 = new Vector3(0.25f, 0.0f, -0.15f);
-                        break;
-                    case 1:
-                        moneyAmt = 50;
-                        v3 = new Vector3(0.0f, 0.4f, 0.0f);
-                        break;
                     case 2: 
+                        moneyAmt = 100;
+                        v3 = new Vector3(0.15f, 0.0f, -0.15f);
+                        conName = "Building";
+                        break;
+                    case 3:
                         moneyAmt = 50;
                         v3 = new Vector3(0.0f, 0.4f, 0.0f);
+                        conName = "Vert wall";
+                        break;
+                    case 4: 
+                        moneyAmt = 50;
+                        v3 = new Vector3(0.0f, 0.4f, 0.0f);
+                        conName = "Horiz wall";
                         break;
                 }
 
@@ -50,8 +56,9 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     var nCon = Instantiate(conFab, new Vector3(tile.transform.position.x + v3.x, v3.y, tile.transform.position.z + v3.z), 
                         conFab.transform.rotation, tile.transform.parent.transform);
                     nCon.transform.localScale = conFab.transform.localScale;
-                    nCon.name = "Construct on " + nCon.transform.parent.name;
+                    nCon.name = conName + " on " + nCon.transform.parent.name;
                     gc.money -= moneyAmt;
+                    gm.gridValues[tile.tileX, tile.tileY] = buildType;
 
                     switch(buildType)
                     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public float moveSpeed = 0.05f;
+    public float moveSpeed = 3.0f;
 
     [SerializeField] private float borderBottom = 0.0f;
     [SerializeField] private float borderLeft = 0.0f;
@@ -23,8 +23,15 @@ public class CameraMovement : MonoBehaviour
     {
         float horIn = Input.GetAxis("Horizontal");
         float verIn = Input.GetAxis("Vertical");
+        bool shiftHeld = Input.GetKey("left shift") || Input.GetKey("right shift");
 
-        this.transform.position = new Vector3(minMax(transform.position.x + horIn * moveSpeed, borderLeft, borderRight), transform.position.y, 
-            minMax(transform.position.z + verIn * moveSpeed, borderBottom, borderTop));
+        float useSpeed = moveSpeed;
+        if(shiftHeld)
+        {
+            useSpeed *= 2;
+        }
+
+        this.transform.position = new Vector3(minMax(transform.position.x + horIn * useSpeed * Time.deltaTime, borderLeft, borderRight), transform.position.y, 
+            minMax(transform.position.z + verIn * useSpeed * Time.deltaTime, borderBottom, borderTop));
     }
 }

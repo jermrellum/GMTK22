@@ -7,6 +7,7 @@ public class WaterSource : MonoBehaviour
     [SerializeField] private int waterAmountStart = 50;
     [SerializeField] private float waterMaxScaleHeight = 1.0f;
     [SerializeField] private int framesPerWaterTick = 30;
+    [SerializeField] private int directionOfFlow = 1; // 0 = north, 1 = east, 2 = south, 3 = west
     [HideInInspector] public int waterAmount;
     public int tileX = 0;
     public int tileY = 10;
@@ -31,7 +32,7 @@ public class WaterSource : MonoBehaviour
         setWaterHeight();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(tickCounter == framesPerWaterTick)
         {
@@ -51,6 +52,26 @@ public class WaterSource : MonoBehaviour
         int[] xDispl = { -1, 0, 1, 0 };
         int[] yDispl = { -0, -1, 0, 1 };
 
+        switch (directionOfFlow)
+        {
+            case 0:
+                xDispl = new[] { 0, -1, 1, 0 };
+                yDispl = new[] { 1, 0, 0, -1 };
+                break;
+            case 1:
+                xDispl = new[] { 1, 0, 0, -1 };
+                yDispl = new[] { 0, -1, 1, 0 };
+                break;
+            case 2:
+                xDispl = new[] { 0, -1, 1, 0 };
+                yDispl = new[] { -1, 0, 0, 1 };
+                break;
+            case 3:
+                xDispl = new[] { -1, 0, 0, 1 };
+                yDispl = new[] { 0, -1, 1, 0 }; 
+                break;
+        }
+
         for(int i=0; i<4; i++)
         {
             int checkX = tileX + xDispl[i];
@@ -68,7 +89,9 @@ public class WaterSource : MonoBehaviour
 
             if (waterAmount <= 0)
             {
+                gm.gridValues[tileX, tileY] = 0;
                 Destroy(this.gameObject);
+                break; //idt it can even reach here, but just in case
             }
             else
             {
@@ -86,15 +109,34 @@ public class WaterSource : MonoBehaviour
     //checks if water can flow into next tile, returns amount of water that flowed out
     private int waterFlow(int tx, int ty)
     {
-        GameObject newWater = Instantiate(this.gameObject, new Vector3(tx * gm.tileSize, 0.2f, ty * gm.tileSize), Quaternion.identity, gm.transform);
-        newWater.transform.localScale = new Vector3(newWater.transform.localScale.x, newWater.transform.localScale.y, newWater.transform.localScale.z);
+        int gval = gm.gridValues[tx, ty];
+        if (gval == 0)
+        {
+            GameObject tilego = GameObject.Find("Tile " + tx + " " + ty);
+            GameObject newWater = Instantiate(this.gameObject, new Vector3(tx * gm.tileSize, 0.2f, ty * gm.tileSize), Quaternion.identity, tilego.transform);
+            newWater.transform.localScale = new Vector3(newWater.transform.localScale.x, newWater.transform.localScale.y, newWater.transform.localScale.z);
 
-        int half = waterAmount - (waterAmount / 2);
-        WaterSource nWS = newWater.GetComponent<WaterSource>();
-        nWS.waterAmount = half;
-        nWS.tileX = tx;
-        nWS.tileY = ty;
+            int half = waterAmount - (waterAmount / 2);
+            WaterSource nWS = newWater.GetComponent<WaterSource>();
+            nWS.waterAmount = half;
+            nWS.tileX = tx;
+            nWS.tileY = ty;
+            gm.gridValues[tx, ty] = 1;
 
-        return half;
+            return half;
+        }
+        else if(gval == 1) //flowing into other water
+        {
+            GameObject tilego = GameObject.Find("Tile " + tx + " " + ty);
+            WaterSource tileWater = tilego.GetComponentInChildren<WaterSource>();
+            int half = waterAmount - (waterAmount / 2);
+            tileWater.waterAmount += half;
+
+            return half;
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

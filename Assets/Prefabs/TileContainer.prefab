@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: ece7deca8b517e64c9bfae9dd8285dd2, type: 3}
   conFab: {fileID: 3332650608242000090, guid: f0bcddec7409409468bb20385cef4eef, type: 3}
-  buildType: 2
+  buildType: 4
 --- !u!1 &1985693906486488021
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: ece7deca8b517e64c9bfae9dd8285dd2, type: 3}
   conFab: {fileID: 7192356363580474305, guid: 9b017bab9ceeb8041b709e244f6dd5b3, type: 3}
-  buildType: 0
+  buildType: 2
 --- !u!1 &3774123156478317798
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +806,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextPanel: {fileID: 4534353550572917680}
   menuPanel: {fileID: 266841417144149062}
+  tileX: 0
+  tileY: 0
 --- !u!1 &7606654979083493813
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,7 +945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: ece7deca8b517e64c9bfae9dd8285dd2, type: 3}
   conFab: {fileID: 3332650608242000090, guid: f0bcddec7409409468bb20385cef4eef, type: 3}
-  buildType: 1
+  buildType: 3
 --- !u!1 &8721203103871875275
 GameObject:
   m_ObjectHideFlags: 0

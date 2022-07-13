@@ -12,11 +12,13 @@ public class Tile : MonoBehaviour
 
     private new Renderer renderer;
     private GameController gc;
+    private GridManager gm;
 
     void Start()
     {
         renderer = GetComponent<Renderer>();
         gc = GetComponentInParent<GameController>();
+        gm = GetComponentInParent<GridManager>();
     }
 
     private void OnMouseEnter()
@@ -46,7 +48,7 @@ public class Tile : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (!gc.contextMenuShowing)
+            if (!gc.contextMenuShowing && gm.gridValues[tileX, tileY] == 0)
             {
                 contextPanel.SetActive(true);
                 gc.contextMenuShowing = true;
