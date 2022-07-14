@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class WaterSource : MonoBehaviour
 {
-    [SerializeField] private int waterAmountStart = 50;
+    [SerializeField] private int waterAmountStart = 200;
     [SerializeField] private float waterMaxScaleHeight = 1.0f;
-    [SerializeField] private int framesPerWaterTick = 30;
-    [SerializeField] private int directionOfFlow = 1; // 0 = north, 1 = east, 2 = south, 3 = west
+    public int directionOfFlow = 1; // 0 = north, 1 = east, 2 = south, 3 = west
     [HideInInspector] public int waterAmount;
     [HideInInspector] public int waterReserve;
     public int tileX = 0;
@@ -43,7 +42,7 @@ public class WaterSource : MonoBehaviour
             return;
         }
 
-        if(tickCounter == framesPerWaterTick)
+        if(tickCounter == gm.framesPerWaterTick)
         {
             waterTick();
             tickCounter = 0;

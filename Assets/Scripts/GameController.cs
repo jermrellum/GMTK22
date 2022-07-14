@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class GameController : MonoBehaviour
         int survivingHouses = gm.countNumberOfBuildType(5);
         int initHouses = gm.getStartingHouses();
 
-        float percSurv = survivingHouses / initHouses;
+        float percSurv = (float) survivingHouses / (float) initHouses;
 
         int newPerc = (int) (percSurv * 100);
 
@@ -70,6 +71,7 @@ public class GameController : MonoBehaviour
         isDay = false;
         daylight.color = Color.black;
         ticksBRCounter = ticksBeforeResume;
+        gm.FloodStart();
     }
 
     public void proceedToDay()
@@ -79,6 +81,10 @@ public class GameController : MonoBehaviour
         day++;
         addMoneyGenerated();
         calculateSurvivors();
+        if(surviving <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
         nightbutton.gameObject.SetActive(true);
     }
 }

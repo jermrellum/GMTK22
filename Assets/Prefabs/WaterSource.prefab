@@ -110,9 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016b0903d79ab3146bb5b4a04191032c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterAmountStart: 50
+  waterAmountStart: 200
   waterMaxScaleHeight: 1
   framesPerWaterTick: 60
+  directionOfFlow: 1
   waterAmount: 0
+  waterReserve: 0
   tileX: 0
   tileY: 5

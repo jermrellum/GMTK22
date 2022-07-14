@@ -7,26 +7,49 @@ public class GridManager : MonoBehaviour
     public int gridWidth;
     public int gridHeight;
     private GameController gc;
+
+    private int floodDirection = 0;
+
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject housePrefab;
+    [SerializeField] private GameObject waterPrefab;
     [SerializeField] private int initialHousesToPlace = 10;
     [SerializeField] private int houseTileBufferFromSides = 1;
+    [SerializeField] private int waterTicksToFlood = 10;
 
+    private int floodCounter = 0;
+    private int waterTicker = 0;
+
+    public int framesPerWaterTick = 60;
     [HideInInspector] public int tileSize = 2;
     [HideInInspector] public int[,] gridValues; // 0 = empty, 1 = water, 2 = building, 3 = vert wall, 4 = horiz wall, 5 = house
 
     private void FixedUpdate()
     {
-        if(!gc.isDay && !checkForWater())
+        if(!gc.isDay)
         {
-            if (gc.ticksBRCounter <= 0)
+            if (!checkForWater())
             {
-                gc.proceedToDay();
+                if (gc.ticksBRCounter <= 0)
+                {
+                    gc.proceedToDay();
+                }
+                else
+                {
+                    gc.ticksBRCounter--;
+                }
+            }
+
+            if (waterTicker == framesPerWaterTick)
+            {
+                Flood();
+                waterTicker = 0;
             }
             else
             {
-                gc.ticksBRCounter--;
+                waterTicker++;
             }
+
         }
     }
     public int getStartingHouses()
@@ -106,4 +129,57 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    private void InstantWater(int wx, int wy)
+    {
+        GameObject tilego = GameObject.Find("Tile " + wx + " " + wy);
+        GameObject nWater = Instantiate(waterPrefab, new Vector3(wx * tileSize, 0.0f, wy * tileSize), waterPrefab.transform.rotation, tilego.transform);
+        WaterSource nWS = nWater.GetComponent<WaterSource>();
+        nWS.tileX = wx;
+        nWS.tileY = wy;
+        nWS.directionOfFlow = (floodDirection + 2) % 4;
+        gridValues[wx, wy] = 1;
+    }
+
+    public void Flood()
+    {
+        if (floodCounter > 0)
+        {
+            floodCounter--;
+            switch (floodDirection)  //0 = north, 1 = east, 2 = south, 3 = west
+            {
+                case 0:
+                    for (int i = 0; i < gridWidth; i++)
+                    {
+                        InstantWater(i, gridHeight - 1);
+                    }
+                    break;
+                case 1:
+                    for (int i = 0; i < gridHeight; i++)
+                    {
+                        InstantWater(gridWidth - 1, i);
+                    }
+                    break;
+                case 2:
+                    for (int i = 0; i < gridWidth; i++)
+                    {
+                        InstantWater(i, 0);
+                    }
+                    break;
+                case 3:
+                    for (int i = 0; i < gridHeight; i++)
+                    {
+                        InstantWater(0, i);
+                    }
+                    break;
+            }
+        }
+    }
+
+    public void FloodStart()
+    {
+        waterTicker = 0;
+        floodCounter = waterTicksToFlood;
+        floodDirection = Random.Range(0, 4);
+        Flood();
+    }
 }

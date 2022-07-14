@@ -45,11 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af23bef8018c9c40a084bcc1a29db9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 80
+  maxHP: 10
   currentHP: 0
   healthPrefab: {fileID: 1326098493552710355, guid: 72cc5783e831ffc44a1860c786e5e9da, type: 3}
   healthEmptyPrefab: {fileID: 702698066424980586, guid: 1b9bdd407c94db34682407b793c6da1e, type: 3}
   maxBarSize: 0.55
+  healthXDisplacement: 0
   healthYDisplacement: 1
   healthZDisplacement: -1
   conFab: {fileID: 3977649738736753894}
