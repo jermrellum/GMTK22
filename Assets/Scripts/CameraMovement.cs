@@ -60,6 +60,10 @@ public class CameraMovement : MonoBehaviour
             
         }
 
+        borderBottom = minMax(borderBottom, -16.66f, -3.27f);
+        moveSpeed = minMax(moveSpeed, 5.63f, 12.33f);
+        scrollSpeed = minMax(scrollSpeed, 71.0f, 136.0f);
+
         bool shiftHeld = Input.GetKey("left shift") || Input.GetKey("right shift");
 
         float useSpeed = moveSpeed;
@@ -69,7 +73,7 @@ public class CameraMovement : MonoBehaviour
         }
 
         this.transform.position = new Vector3(minMax(transform.position.x + horIn * useSpeed * Time.deltaTime, borderLeft, borderRight), 
-            transform.position.y + sIn * scrollSpeed * Time.deltaTime, 
+            minMax(transform.position.y + sIn * scrollSpeed * Time.deltaTime, zoomMin, zoomMax), 
             minMax(transform.position.z + verIn * useSpeed * Time.deltaTime, borderBottom, borderTop));
     }
 }
