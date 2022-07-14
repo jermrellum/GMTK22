@@ -14,6 +14,7 @@ public class Construct : MonoBehaviour
     [SerializeField] private float healthZDisplacement = -0.5f;
     private GameObject healthbar;
     private GameObject healthbarE;
+    public GameObject conFab;
 
     [SerializeField] private float turnYellow = 0.5f;
     [SerializeField] private float turnRed = 0.2f;
@@ -26,13 +27,13 @@ public class Construct : MonoBehaviour
 
     private void Start()
     {
-        tile = GetComponentInParent<Tile>();
+        //Debug.Log(transform);
+        tile = transform.parent.GetComponentInChildren<Tile>();
         currentHP = maxHP;
     }
 
     public void destroyThisConstruct()
     {
-        Debug.Log(tile.name);
         tile.SetTileTypeToZero();
         Destroy(this.gameObject);
     }
@@ -47,24 +48,22 @@ public class Construct : MonoBehaviour
             {
                 spawnedHealth = true;
                 healthbar = Instantiate(healthPrefab, 
-                    new Vector3(transform.position.x - percHealth * maxBarSize / 2, transform.position.y + healthYDisplacement, transform.position.z + healthZDisplacement), 
+                    new Vector3(transform.position.x, transform.position.y + healthYDisplacement, transform.position.z + healthZDisplacement), 
                     healthPrefab.transform.rotation, transform);
                 healthbarE = Instantiate(healthEmptyPrefab,
                     new Vector3(transform.position.x, transform.position.y + healthYDisplacement, transform.position.z + healthZDisplacement),
                     healthPrefab.transform.rotation, transform);
             }
 
-            healthbar.transform.localScale = new Vector3(maxBarSize * percHealth / transform.localScale.x, 
-                healthPrefab.transform.localScale.y / transform.localScale.y, healthPrefab.transform.localScale.z / transform.localScale.z);
+            healthbar.transform.localScale = new Vector3(maxBarSize * percHealth, healthPrefab.transform.localScale.y, healthPrefab.transform.localScale.z);
+            healthbarE.transform.localScale = new Vector3(healthEmptyPrefab.transform.localScale.x, healthEmptyPrefab.transform.localScale.y, healthEmptyPrefab.transform.localScale.z);
+            healthbar.transform.position = new Vector3(transform.position.x - (1 - percHealth) * maxBarSize/2, healthbar.transform.position.y, healthbar.transform.position.z);
 
-            healthbarE.transform.localScale = new Vector3(healthEmptyPrefab.transform.localScale.x / transform.localScale.x,
-                healthEmptyPrefab.transform.localScale.y / transform.localScale.y, healthEmptyPrefab.transform.localScale.z / transform.localScale.z);
-
-            if (percHealth < turnRed)
+            if (percHealth <= turnRed)
             {
                 healthbar.GetComponent<MeshRenderer>().material = redMat;
             }
-            else if (percHealth < turnYellow)
+            else if (percHealth <= turnYellow)
             {
                 healthbar.GetComponent<MeshRenderer>().material = yellowMat;
             }

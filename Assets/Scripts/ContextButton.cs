@@ -41,12 +41,12 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                         break;
                     case 3:
                         moneyAmt = 50;
-                        v3 = new Vector3(0.0f, 0.4f, 0.0f);
+                        v3 = new Vector3(0.0f, 0.077f, 0.0f);
                         conName = "Vert wall";
                         break;
                     case 4: 
                         moneyAmt = 50;
-                        v3 = new Vector3(0.0f, 0.4f, 0.0f);
+                        v3 = new Vector3(0.0f, 0.077f, 0.0f);
                         conName = "Horiz wall";
                         break;
                 }
@@ -55,7 +55,7 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 {
                     var nCon = Instantiate(conFab, new Vector3(tile.transform.position.x + v3.x, v3.y, tile.transform.position.z + v3.z), 
                         conFab.transform.rotation, tile.transform.parent.transform);
-                    nCon.transform.localScale = conFab.transform.localScale;
+                    Construct nConstr = nCon.GetComponent<Construct>();
                     nCon.name = conName + " on " + nCon.transform.parent.name;
                     gc.money -= moneyAmt;
                     gm.gridValues[tile.tileX, tile.tileY] = buildType;
@@ -63,10 +63,10 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     switch(buildType)
                     {
                         case 3:
-                            nCon.transform.rotation = Quaternion.Euler(270.0f, 0.0f, 90.0f);
+                            nConstr.transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
                             break;
                         case 4:
-                            nCon.transform.rotation = Quaternion.Euler(270.0f, 0.0f, 0.0f);
+                            nConstr.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                             break;
                     }
                 }
