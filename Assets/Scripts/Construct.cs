@@ -10,6 +10,7 @@ public class Construct : MonoBehaviour
     [SerializeField] private GameObject healthEmptyPrefab;
     private bool spawnedHealth = false;
     [SerializeField] private float maxBarSize = 0.55f;
+    [SerializeField] private float healthXDisplacement = 0.0f;
     [SerializeField] private float healthYDisplacement = 0.5f;
     [SerializeField] private float healthZDisplacement = -0.5f;
     private GameObject healthbar;
@@ -48,16 +49,16 @@ public class Construct : MonoBehaviour
             {
                 spawnedHealth = true;
                 healthbar = Instantiate(healthPrefab, 
-                    new Vector3(transform.position.x, transform.position.y + healthYDisplacement, transform.position.z + healthZDisplacement), 
+                    new Vector3(transform.position.x + healthXDisplacement, transform.position.y + healthYDisplacement, transform.position.z + healthZDisplacement), 
                     healthPrefab.transform.rotation, transform);
                 healthbarE = Instantiate(healthEmptyPrefab,
-                    new Vector3(transform.position.x, transform.position.y + healthYDisplacement, transform.position.z + healthZDisplacement),
+                    new Vector3(transform.position.x + healthXDisplacement, transform.position.y + healthYDisplacement, transform.position.z + healthZDisplacement),
                     healthPrefab.transform.rotation, transform);
             }
 
             healthbar.transform.localScale = new Vector3(maxBarSize * percHealth, healthPrefab.transform.localScale.y, healthPrefab.transform.localScale.z);
             healthbarE.transform.localScale = new Vector3(healthEmptyPrefab.transform.localScale.x, healthEmptyPrefab.transform.localScale.y, healthEmptyPrefab.transform.localScale.z);
-            healthbar.transform.position = new Vector3(transform.position.x - (1 - percHealth) * maxBarSize/2, healthbar.transform.position.y, healthbar.transform.position.z);
+            healthbar.transform.position = new Vector3(transform.position.x + healthXDisplacement - (1 - percHealth) * maxBarSize/2, healthbar.transform.position.y, healthbar.transform.position.z);
 
             if (percHealth <= turnRed)
             {

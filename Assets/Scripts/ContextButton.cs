@@ -41,8 +41,8 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                         break;
                     case 3:
                         moneyAmt = 50;
-                        v3 = new Vector3(0.0f, 0.077f, 0.0f);
-                        conName = "Vert wall";
+                        v3 = new Vector3(-1.0f, 0.077f, 0.0f);
+                        conName = "Wall";
                         break;
                     case 4: 
                         moneyAmt = 50;

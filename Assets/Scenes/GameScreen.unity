@@ -1083,7 +1083,7 @@ MonoBehaviour:
   gridWidth: 40
   gridHeight: 30
   tilePrefab: {fileID: 3774123156478317798, guid: 1fea785cb71debc4793fb2544340cdbd, type: 3}
-  housePrefab: {fileID: 919132149155446097, guid: dc3cc15f64e072f40be3d05da340078c, type: 3}
+  housePrefab: {fileID: 6562218276313412417, guid: 9ed8c423b8eb45142b7458d7804443d2, type: 3}
   initialHousesToPlace: 20
   houseTileBufferFromSides: 1
   tileSize: 2
