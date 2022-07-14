@@ -16,5 +16,7 @@ public class DayRecall : MonoBehaviour
             theS = "";
         }
         surviveText.text = "Survived " + drc.dayToMember + " day" + theS;
+
+        Destroy(dr);
     }
 }

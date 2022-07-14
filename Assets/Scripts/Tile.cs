@@ -14,11 +14,15 @@ public class Tile : MonoBehaviour
     private GameController gc;
     private GridManager gm;
 
+    private bool tileIsSelectable = false;
+
     void Start()
     {
         renderer = GetComponent<Renderer>();
         gc = GetComponentInParent<GameController>();
         gm = GetComponentInParent<GridManager>();
+
+        tileIsSelectable = tileX > 0 && tileX < (gm.gridWidth - 1) && tileY > 0 && tileY < (gm.gridHeight - 1);
     }
 
     public void SetTileTypeToZero()
@@ -29,7 +33,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (!gc.contextMenuShowing)
+        if (!gc.contextMenuShowing && tileIsSelectable)
         {
             renderer.material.color = Color.yellow;
         }
@@ -54,7 +58,7 @@ public class Tile : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (!gc.contextMenuShowing && gm.gridValues[tileX, tileY] == 0)
+            if (!gc.contextMenuShowing && gc.isDay && gm.gridValues[tileX, tileY] == 0 && tileIsSelectable)
             {
                 contextPanel.SetActive(true);
                 gc.contextMenuShowing = true;

@@ -14,7 +14,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject housePrefab;
     [SerializeField] private GameObject waterPrefab;
     [SerializeField] private int initialHousesToPlace = 10;
-    [SerializeField] private int houseTileBufferFromSides = 1;
+    [SerializeField] private int houseTileBufferFromSides = 2;
     [SerializeField] private int waterTicksToFlood = 10;
 
     private int floodCounter = 0;

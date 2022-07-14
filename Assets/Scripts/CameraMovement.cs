@@ -6,6 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     public float moveSpeed = 3.0f;
     public float scrollSpeed = 3.0f;
+    private float startScrollSpeed = 3.0f;
 
     [SerializeField] private float borderBottom = 0.0f;
     [SerializeField] private float borderLeft = 0.0f;
@@ -22,6 +23,11 @@ public class CameraMovement : MonoBehaviour
         return System.Math.Min(System.Math.Max(min, val), max);
     }
 
+    private void Start()
+    {
+        startScrollSpeed = scrollSpeed;
+    }
+
     void Update()
     {
         float horIn = Input.GetAxis("Horizontal");
@@ -31,18 +37,26 @@ public class CameraMovement : MonoBehaviour
 
         if (mscroll > 0 && transform.position.y > zoomMin)    //zoom in
         {
+            scrollSpeed -= 1.0f;
+            float percScroll = scrollSpeed / startScrollSpeed;
+
             sIn = -1.0f;
-            verIn = 20.0f;
-            borderBottom += 0.2f;
-            moveSpeed -= 0.1f;
+            verIn = 20.0f * percScroll;
+            borderBottom += 0.2f * percScroll;
+            moveSpeed -= 0.1f * percScroll;
+            
 
         }
         else if(mscroll < 0 && transform.position.y < zoomMax)  //zoom out
         {
+            float percScroll = scrollSpeed / startScrollSpeed;
+
             sIn = 1.0f;
-            verIn = -20.0f;
-            borderBottom -= 0.2f;
-            moveSpeed += 0.1f;
+            verIn = -20.0f * percScroll;
+            borderBottom -= 0.2f * percScroll;
+            moveSpeed += 0.1f * percScroll;
+
+            scrollSpeed += 1.0f;
             
         }
 

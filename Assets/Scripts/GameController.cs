@@ -15,7 +15,9 @@ public class GameController : MonoBehaviour
     public int surviving = 100;
     public int day = 1;
     public bool isDay = true;
-    [SerializeField] private int ticksBeforeResume = 120;
+    [SerializeField] AudioSource DayMusic;
+    [SerializeField] AudioSource NightMusic;
+    [SerializeField] private int framesBeforeResume = 120;
     [HideInInspector] public int ticksBRCounter = 0;
     [HideInInspector] public bool contextMenuShowing = false;
     [HideInInspector] public bool hoveringOnButton = false;
@@ -70,8 +72,10 @@ public class GameController : MonoBehaviour
     {
         isDay = false;
         daylight.color = Color.black;
-        ticksBRCounter = ticksBeforeResume;
+        ticksBRCounter = framesBeforeResume;
         gm.FloodStart();
+        DayMusic.Stop();
+        NightMusic.Play();
     }
 
     public void proceedToDay()
@@ -89,6 +93,8 @@ public class GameController : MonoBehaviour
         day++;
 
         nightbutton.gameObject.SetActive(true);
+        NightMusic.Stop();
+        DayMusic.Play();
     }
 
     private void GameEnd()
