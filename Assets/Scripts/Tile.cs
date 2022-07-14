@@ -21,6 +21,12 @@ public class Tile : MonoBehaviour
         gm = GetComponentInParent<GridManager>();
     }
 
+    public void SetTileTypeToZero()
+    {
+        gm.gridValues[tileX, tileY] = 0;
+        gc.calculateSurvivors();
+    }
+
     private void OnMouseEnter()
     {
         if (!gc.contextMenuShowing)

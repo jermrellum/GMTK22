@@ -467,8 +467,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859500704}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -533.692, y: -250.3032, z: -3.279477}
-  m_LocalScale: {x: 200, y: 0.1, z: 200}
+  m_LocalPosition: {x: -473.17, y: -250.3032, z: -3.279477}
+  m_LocalScale: {x: 483.2, y: 0.1, z: 553.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1020674170}
@@ -1024,7 +1024,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585511486}
   m_LocalRotation: {x: 0.40124834, y: -0, z: -0, w: 0.9159693}
-  m_LocalPosition: {x: -533.692, y: -243.9832, z: -13.279477}
+  m_LocalPosition: {x: -492.8387, y: -234.2396, z: -9.377315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1043,12 +1043,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89de3bc371200e9448643307d115d432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 8.099998
   scrollSpeed: 100
-  borderBottom: -4
+  borderBottom: -8.199996
   borderLeft: 3
   borderRight: 74
   borderTop: 43
+  zoomMax: 40
+  zoomMin: 3
 --- !u!1 &1731646652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,7 +1084,8 @@ MonoBehaviour:
   gridHeight: 30
   tilePrefab: {fileID: 3774123156478317798, guid: 1fea785cb71debc4793fb2544340cdbd, type: 3}
   housePrefab: {fileID: 919132149155446097, guid: dc3cc15f64e072f40be3d05da340078c, type: 3}
-  initialHousesToPlace: 10
+  initialHousesToPlace: 20
+  houseTileBufferFromSides: 1
   tileSize: 2
 --- !u!4 &1731646654
 Transform:

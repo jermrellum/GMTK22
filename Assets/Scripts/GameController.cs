@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
         money += earnedMoney;
     }
 
-    private void calculateSurvivors()
+    public void calculateSurvivors()
     {
         int survivingHouses = gm.countNumberOfBuildType(5);
         int initHouses = gm.getStartingHouses();

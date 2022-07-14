@@ -145,13 +145,14 @@ public class WaterSource : MonoBehaviour
     private int waterFlow(int tx, int ty)
     {
         int gval = gm.gridValues[tx, ty];
+        GameObject tilego = GameObject.Find("Tile " + tx + " " + ty);
+        int half = waterAmount - (waterAmount / 2);
         if (gval == 0)
         {
-            GameObject tilego = GameObject.Find("Tile " + tx + " " + ty);
             GameObject newWater = Instantiate(this.gameObject, new Vector3(tx * gm.tileSize, 0.2f, ty * gm.tileSize), Quaternion.identity, tilego.transform);
             newWater.transform.localScale = new Vector3(newWater.transform.localScale.x, newWater.transform.localScale.y, newWater.transform.localScale.z);
 
-            int half = waterAmount - (waterAmount / 2);
+            
             WaterSource nWS = newWater.GetComponent<WaterSource>();
             nWS.waterAmount = half;
             nWS.tileX = tx;
@@ -162,16 +163,25 @@ public class WaterSource : MonoBehaviour
         }
         else if(gval == 1) //flowing into other water
         {
-            GameObject tilego = GameObject.Find("Tile " + tx + " " + ty);
             WaterSource tileWater = tilego.GetComponentInChildren<WaterSource>();
-            int half = waterAmount - (waterAmount / 2);
             tileWater.waterReserve += half;
 
             return half;
         }
-        else
+        else //flowing into construct
         {
-            return 0;
+            Construct constr = tilego.GetComponentInChildren<Construct>();
+            constr.currentHP -= half;
+            if(constr.currentHP > 0)
+            {
+                constr.calcHealth();
+                return 0;
+            }
+            else
+            {
+                constr.destroyThisConstruct();
+                return half;
+            }
         }
     }
 }

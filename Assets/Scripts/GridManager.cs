@@ -10,6 +10,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject housePrefab;
     [SerializeField] private int initialHousesToPlace = 10;
+    [SerializeField] private int houseTileBufferFromSides = 1;
 
     [HideInInspector] public int tileSize = 2;
     [HideInInspector] public int[,] gridValues; // 0 = empty, 1 = water, 2 = building, 3 = vert wall, 4 = horiz wall, 5 = house
@@ -91,8 +92,8 @@ public class GridManager : MonoBehaviour
     {
         for (int i = 0; i < initialHousesToPlace; i++)
         {
-            int rx = Random.Range(0, gridWidth);
-            int ry = Random.Range(0, gridHeight);
+            int rx = Random.Range(0 + houseTileBufferFromSides, gridWidth - houseTileBufferFromSides);
+            int ry = Random.Range(0 + houseTileBufferFromSides, gridHeight - houseTileBufferFromSides);
 
             if(gridValues[rx, ry] == 0)
             {

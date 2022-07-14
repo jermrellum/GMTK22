@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8410869660314783413}
   - component: {fileID: 4834248002298396944}
   - component: {fileID: 7273953005256553946}
+  - component: {fileID: 6300941514446365812}
   m_Layer: 0
   m_Name: HouseTall
   m_TagString: Untagged
@@ -83,3 +84,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6300941514446365812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9219635656523518991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af23bef8018c9c40a084bcc1a29db9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  currentHP: 0
+  healthPrefab: {fileID: 1326098493552710355, guid: 72cc5783e831ffc44a1860c786e5e9da, type: 3}
+  healthEmptyPrefab: {fileID: 702698066424980586, guid: 1b9bdd407c94db34682407b793c6da1e, type: 3}
+  maxBarSize: 0.55
+  healthYDisplacement: 1
+  healthZDisplacement: -1
+  turnYellow: 0.5
+  turnRed: 0.2
+  yellowMat: {fileID: 2100000, guid: 86a5ef4bd293dde4cba467910579080b, type: 2}
+  redMat: {fileID: 2100000, guid: 203b5b6b11eb036418f8ef33cdd62200, type: 2}
