@@ -21,10 +21,21 @@ public class GameController : MonoBehaviour
     [HideInInspector] public int ticksBRCounter = 0;
     [HideInInspector] public bool contextMenuShowing = false;
     [HideInInspector] public bool hoveringOnButton = false;
+    public bool isHard = false;
 
     private Light daylight;
     private Color dayColor;
     private GridManager gm;
+
+    private void Awake()
+    {
+        GameObject dr = GameObject.Find("Difficulty Rememberer");
+        DiffMember dm = dr.GetComponent<DiffMember>();
+
+        isHard = dm.isHard;
+
+        Destroy(dr);
+    }
 
     private void Start()
     {
@@ -73,7 +84,12 @@ public class GameController : MonoBehaviour
         isDay = false;
         daylight.color = Color.black;
         ticksBRCounter = framesBeforeResume;
-        gm.FloodStart();
+
+        if(isHard)
+        {
+            gm.FloodStart();
+        }
+
         DayMusic.Stop();
         NightMusic.Play();
     }
@@ -95,6 +111,11 @@ public class GameController : MonoBehaviour
         nightbutton.gameObject.SetActive(true);
         NightMusic.Stop();
         DayMusic.Play();
+
+        if (!isHard)
+        {
+            gm.FloodStart();
+        }
     }
 
     private void GameEnd()

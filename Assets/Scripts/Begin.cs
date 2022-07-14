@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Begin : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    [SerializeField] private bool isHard = false;
     public Texture2D cursorTexture;
     private GameController gc;
     private CursorMode cursorMode = CursorMode.Auto;
@@ -17,6 +18,11 @@ public class Begin : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
+
+        GameObject dr = GameObject.Find("Difficulty Rememberer");
+        DiffMember dm = dr.GetComponent<DiffMember>();
+        dm.isHard = isHard;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void OnPointerEnter(PointerEventData eventData)
