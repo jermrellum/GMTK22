@@ -137,7 +137,7 @@ public class WaterSource : MonoBehaviour
     private void setWaterHeight()
     {
         float percentWater = (float)waterAmount / (float)waterAmountStart;
-        transform.localScale = new Vector3(transform.localScale.x, percentWater * waterMaxScaleHeight, transform.localScale.z);
+        transform.localScale = new Vector3(transform.localScale.x, Mathf.Sqrt(percentWater) * waterMaxScaleHeight, transform.localScale.z);
     }
 
     //checks if water can flow into next tile, returns amount of water that flowed out

@@ -111,8 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterAmountStart: 200
-  waterMaxScaleHeight: 1
-  framesPerWaterTick: 60
+  waterMaxScaleHeight: 4
   directionOfFlow: 1
   waterAmount: 0
   waterReserve: 0

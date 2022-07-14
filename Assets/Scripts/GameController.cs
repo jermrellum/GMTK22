@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
     {
         int survivingBuildings = gm.countNumberOfBuildType(2);
 
-        int earnedMoney = survivingBuildings * worthOfBuilding;
+        int earnedMoney = survivingBuildings * worthOfBuilding * surviving;
 
         money += earnedMoney;
     }
@@ -76,15 +76,27 @@ public class GameController : MonoBehaviour
 
     public void proceedToDay()
     {
+        calculateSurvivors();
+        
+        if(surviving <= 0)
+        {
+            GameEnd();
+        }
+
+        addMoneyGenerated();
         isDay = true;
         daylight.color = dayColor;
         day++;
-        addMoneyGenerated();
-        calculateSurvivors();
-        if(surviving <= 0)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
+
         nightbutton.gameObject.SetActive(true);
+    }
+
+    private void GameEnd()
+    {
+        GameObject dr = GameObject.Find("DayRememberer");
+        DayRemember drc = dr.GetComponent<DayRemember>();
+        drc.dayToMember = day;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
