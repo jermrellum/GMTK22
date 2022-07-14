@@ -85,7 +85,7 @@ public class GridManager : MonoBehaviour
         gridValues = new int[gridWidth, gridHeight];
         GenerateGrid();
         PlaceHouses();
-        if (!gc.isHard)
+        if (gc.difficulty > 0)
         {
             FloodStart();
         }

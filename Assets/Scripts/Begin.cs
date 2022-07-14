@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Begin : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    [SerializeField] private bool isHard = false;
+    [SerializeField] private int difficulty = 0;
     public Texture2D cursorTexture;
     private GameController gc;
     private CursorMode cursorMode = CursorMode.Auto;
@@ -21,7 +21,7 @@ public class Begin : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
         GameObject dr = GameObject.Find("Difficulty Rememberer");
         DiffMember dm = dr.GetComponent<DiffMember>();
-        dm.isHard = isHard;
+        dm.difficulty = difficulty;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

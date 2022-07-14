@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public int ticksBRCounter = 0;
     [HideInInspector] public bool contextMenuShowing = false;
     [HideInInspector] public bool hoveringOnButton = false;
-    public bool isHard = false;
+    public int difficulty = 0; // 0 = hard, 1 = medium, 2 = easiest
 
     private Light daylight;
     private Color dayColor;
@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         GameObject dr = GameObject.Find("Difficulty Rememberer");
         DiffMember dm = dr.GetComponent<DiffMember>();
 
-        isHard = dm.isHard;
+        difficulty = dm.difficulty;
 
         Destroy(dr);
     }
@@ -52,6 +52,11 @@ public class GameController : MonoBehaviour
         int earnedMoney = survivingBuildings * worthOfBuilding * surviving;
 
         money += earnedMoney;
+
+        if(difficulty == 2)
+        {
+            money += 250;
+        }
     }
 
     public void calculateSurvivors()
@@ -85,7 +90,7 @@ public class GameController : MonoBehaviour
         daylight.color = Color.black;
         ticksBRCounter = framesBeforeResume;
 
-        if(isHard)
+        if(difficulty == 0)
         {
             gm.FloodStart();
         }
@@ -112,7 +117,7 @@ public class GameController : MonoBehaviour
         NightMusic.Stop();
         DayMusic.Play();
 
-        if (!isHard)
+        if (difficulty > 0)
         {
             gm.FloodStart();
         }

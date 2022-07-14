@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DiffMember : MonoBehaviour
 {
-    [HideInInspector] public bool isHard = false;
+    [HideInInspector] public int difficulty = 0;
 
     private void Awake()
     {

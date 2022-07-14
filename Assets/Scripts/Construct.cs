@@ -5,6 +5,7 @@ using UnityEngine;
 public class Construct : MonoBehaviour
 {
     [SerializeField] int maxHP;
+    private int useMaxHP;
     public int currentHP;
     [SerializeField] private GameObject healthPrefab;
     [SerializeField] private GameObject healthEmptyPrefab;
@@ -20,6 +21,8 @@ public class Construct : MonoBehaviour
     [SerializeField] private float turnYellow = 0.5f;
     [SerializeField] private float turnRed = 0.2f;
 
+    private GameController gc;
+
     //[SerializeField] private Material greenMat;
     [SerializeField] private Material yellowMat;
     [SerializeField] private Material redMat;
@@ -30,7 +33,15 @@ public class Construct : MonoBehaviour
     {
         //Debug.Log(transform);
         tile = transform.parent.GetComponentInChildren<Tile>();
-        currentHP = maxHP;
+        gc = GetComponentInParent<GameController>();
+
+        useMaxHP = maxHP;
+        if(gc.difficulty == 2)
+        {
+            useMaxHP = maxHP * 2;
+        }
+ 
+        currentHP = useMaxHP;
     }
 
     public void destroyThisConstruct()
@@ -41,7 +52,7 @@ public class Construct : MonoBehaviour
 
     public void calcHealth()
     {
-        float percHealth = (float)currentHP / (float)maxHP;
+        float percHealth = (float)currentHP / (float)useMaxHP;
 
         if (percHealth < 0.999f)
         {
