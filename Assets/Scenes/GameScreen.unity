@@ -675,11 +675,13 @@ MonoBehaviour:
   moneyText: {fileID: 1575257163}
   healthText: {fileID: 740053838}
   dayText: {fileID: 1416606755}
+  nightbutton: {fileID: 2005347583}
   money: 1000
+  worthOfBuilding: 10
   surviving: 100
   day: 1
   isDay: 1
-  ticksBeforeResume: 102
+  ticksBeforeResume: 100
   ticksBRCounter: 0
   contextMenuShowing: 0
   hoveringOnButton: 0
@@ -1042,9 +1044,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  borderBottom: -3
-  borderLeft: 5
-  borderRight: 73
+  scrollSpeed: 100
+  borderBottom: -4
+  borderLeft: 3
+  borderRight: 74
   borderTop: 43
 --- !u!1 &1731646652
 GameObject:
@@ -1078,6 +1081,7 @@ MonoBehaviour:
   gridWidth: 40
   gridHeight: 30
   tilePrefab: {fileID: 3774123156478317798, guid: 1fea785cb71debc4793fb2544340cdbd, type: 3}
+  housePrefab: {fileID: 919132149155446097, guid: dc3cc15f64e072f40be3d05da340078c, type: 3}
   initialHousesToPlace: 10
   tileSize: 2
 --- !u!4 &1731646654
@@ -1225,7 +1229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}

@@ -58,6 +58,14 @@ public class WaterSource : MonoBehaviour
     {
         //checking adjacent tiles
 
+        waterAmount--;
+
+        if(waterAmount == 0)
+        {
+            removeWater();
+            return;
+        }
+
         int[] xDispl = { -1, 0, 1, 0 };
         int[] yDispl = { -0, -1, 0, 1 };
 
@@ -102,8 +110,7 @@ public class WaterSource : MonoBehaviour
                 {
                     break;
                 }
-                gm.gridValues[tileX, tileY] = 0;
-                Destroy(this.gameObject);
+                removeWater();
                 break; //idt it can even reach here, but just in case
             }
             else
@@ -114,6 +121,12 @@ public class WaterSource : MonoBehaviour
 
         emptyReserve();
         
+    }
+
+    private void removeWater()
+    {
+        gm.gridValues[tileX, tileY] = 0;
+        Destroy(this.gameObject);
     }
 
     private void emptyReserve()

@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public Text dayText;
     public Button nightbutton;
     public int money = 1000;
+    public int worthOfBuilding = 10;
     public int surviving = 100;
     public int day = 1;
     public bool isDay = true;
@@ -20,17 +21,35 @@ public class GameController : MonoBehaviour
 
     private Light daylight;
     private Color dayColor;
+    private GridManager gm;
 
     private void Start()
     {
         daylight = GetComponentInChildren<Light>();
         dayColor = daylight.color;
+        gm = GetComponentInChildren<GridManager>();
     }
 
     //each building generates some amount of money, if it survived
     private void addMoneyGenerated()
     {
+        int survivingBuildings = gm.countNumberOfBuildType(2);
 
+        int earnedMoney = survivingBuildings * worthOfBuilding;
+
+        money += earnedMoney;
+    }
+
+    private void calculateSurvivors()
+    {
+        int survivingHouses = gm.countNumberOfBuildType(5);
+        int initHouses = gm.getStartingHouses();
+
+        float percSurv = survivingHouses / initHouses;
+
+        int newPerc = (int) (percSurv * 100);
+
+        surviving = newPerc;
     }
 
     private void Update()
@@ -59,6 +78,7 @@ public class GameController : MonoBehaviour
         daylight.color = dayColor;
         day++;
         addMoneyGenerated();
+        calculateSurvivors();
         nightbutton.gameObject.SetActive(true);
     }
 }
