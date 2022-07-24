@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] private GameObject contextPanel;
     [SerializeField] private GameObject menuPanel;
+    private Color rc;
 
     [HideInInspector] public int tileX;
     [HideInInspector] public int tileY;
@@ -16,9 +17,15 @@ public class Tile : MonoBehaviour
 
     private bool tileIsSelectable = false;
 
+    public Texture2D cursorTexture;
+    private CursorMode cursorMode = CursorMode.Auto;
+    private Vector2 hotSpot = new Vector2(6.0f, 0.0f);
+
     void Start()
     {
         renderer = GetComponent<Renderer>();
+        rc = renderer.material.color;
+
         gc = GetComponentInParent<GameController>();
         gm = GetComponentInParent<GridManager>();
 
@@ -27,23 +34,58 @@ public class Tile : MonoBehaviour
 
     public void SetTileTypeToZero()
     {
-        gm.gridValues[tileX, tileY] = 0;
+        SetTileTypeToZero(0);
+    }
+
+    public void SetTileTypeToZero(int gv)
+    {
+        gm.gridValues[tileX, tileY] = gv;
         gc.calculateSurvivors();
     }
 
     private void OnMouseEnter()
     {
-        if (!gc.contextMenuShowing && tileIsSelectable)
+        if (gc.IsInMenu() && tileIsSelectable && gc.isDay)
         {
-            renderer.material.color = Color.yellow;
+            SelectTile();
         }
+    }
+
+    public void SelectTile()
+    {
+        renderer.material.color = Color.yellow;
+        if(gm.gridValues[tileX, tileY] > 1)
+        {
+            Construct cons = transform.parent.gameObject.GetComponentInChildren<Construct>();
+            if (cons != null && cons.hl != null)
+            {
+                cons.hl.SetActive(true);
+                Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+            }
+        }
+        
+    }
+
+    public void DeselectTile()
+    {
+        renderer.material.color = rc;
+        if (gm.gridValues[tileX, tileY] > 1)
+        {
+            Construct cons = transform.parent.gameObject.GetComponentInChildren<Construct>();
+            if (cons != null && cons.hl != null)
+            {
+                cons.hl.SetActive(false);
+                Cursor.SetCursor(null, Vector2.zero, cursorMode);
+            }
+        }
+        
     }
 
     private void OnMouseExit()
     {
-        if (!gc.contextMenuShowing)
+        if (gc.IsInMenu())
         {
-            renderer.material.color = Color.white;
+            DeselectTile();
         }
     }
     public void hidePanel()
@@ -51,18 +93,22 @@ public class Tile : MonoBehaviour
         contextPanel.SetActive(false);
         gc.contextMenuShowing = false;
         gc.hoveringOnButton = false;
-        renderer.material.color = Color.white;
+        gc.isTileContext = false;
+        DeselectTile();
     }
 
     private void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (!gc.contextMenuShowing && gc.isDay && gm.gridValues[tileX, tileY] == 0 && tileIsSelectable)
+            if (gc.IsInMenu() && gc.isDay && gm.gridValues[tileX, tileY] == 0 && tileIsSelectable)
             {
+                gc.CallHudClear();
                 contextPanel.SetActive(true);
                 gc.contextMenuShowing = true;
                 gc.hoveringOnButton = true;
+                gc.isTileContext = true;
+                gc.onlyHpDisp = false;
                 menuPanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
             }
         }

@@ -56,6 +56,7 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     var nCon = Instantiate(conFab, new Vector3(tile.transform.position.x + v3.x, v3.y, tile.transform.position.z + v3.z), 
                         conFab.transform.rotation, tile.transform.parent.transform);
                     Construct nConstr = nCon.GetComponent<Construct>();
+                    nConstr.buildType = buildType;
                     nCon.name = conName + " on " + nCon.transform.parent.name;
                     gc.money -= moneyAmt;
                     gm.gridValues[tile.tileX, tile.tileY] = buildType;
@@ -72,7 +73,7 @@ public class ContextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 }
                 else
                 {
-                    Debug.Log("No money");
+                    gc.NoMoney();
                 }
 
                 tile.hidePanel();

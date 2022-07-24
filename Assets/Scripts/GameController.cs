@@ -21,20 +21,26 @@ public class GameController : MonoBehaviour
     [HideInInspector] public int ticksBRCounter = 0;
     [HideInInspector] public bool contextMenuShowing = false;
     [HideInInspector] public bool hoveringOnButton = false;
+    [HideInInspector] public bool firstFrameConstructContext = false;
+    [HideInInspector] public bool onlyHpDisp = false;
+    [HideInInspector] public bool isTileContext = false;
     public int difficulty = 0; // 0 = hard, 1 = medium, 2 = easiest
 
     private Light daylight;
     private Color dayColor;
     private GridManager gm;
+    private HudPanel hudPan;
 
     private void Awake()
     {
-        GameObject dr = GameObject.Find("Difficulty Rememberer");
+        /*GameObject dr = GameObject.Find("Difficulty Rememberer");
         DiffMember dm = dr.GetComponent<DiffMember>();
 
         difficulty = dm.difficulty;
 
-        Destroy(dr);
+        Destroy(dr);*/
+
+        difficulty = 2;
     }
 
     private void Start()
@@ -42,6 +48,22 @@ public class GameController : MonoBehaviour
         daylight = GetComponentInChildren<Light>();
         dayColor = daylight.color;
         gm = GetComponentInChildren<GridManager>();
+        hudPan = GetComponentInChildren<HudPanel>();
+    }
+
+    public bool IsInMenu()
+    {
+        return (!contextMenuShowing || onlyHpDisp);
+    }
+
+    public void CallHudClear()
+    {
+        hudPan.ClearHudOfConstructContexts();
+    }
+
+    public void ConstructButtonFunc(int buttonFunc)
+    {
+        hudPan.ConstructButtonFunc(buttonFunc);
     }
 
     //each building generates some amount of money, if it survived
@@ -82,6 +104,11 @@ public class GameController : MonoBehaviour
             timeOfDay = "Night";
         }
         dayText.text = timeOfDay + " " + day;
+    }
+
+    public void NoMoney()
+    {
+        Debug.Log("no money");
     }
 
     public void proceedToNight()

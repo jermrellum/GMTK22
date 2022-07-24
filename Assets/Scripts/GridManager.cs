@@ -17,6 +17,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int houseTileBufferFromSides = 2;
     [SerializeField] private int waterTicksToFlood = 10;
 
+    [SerializeField] private Material[] tileMats;
+
     private int floodCounter = 0;
     private int waterTicker = 0;
 
@@ -97,8 +99,8 @@ public class GridManager : MonoBehaviour
         {
             for(int j=0; j<gridHeight; j++)
             {
-                var nTileCont = Instantiate(tilePrefab, new Vector3(i*tileSize, 0, j*tileSize), Quaternion.identity);
-                nTileCont.transform.parent = gameObject.transform;
+                var nTileCont = Instantiate(tilePrefab, new Vector3(i*tileSize, 0, j*tileSize), Quaternion.identity, transform);
+                nTileCont.GetComponentInChildren<MeshRenderer>().material = tileMats[Random.Range(0,4)];
                 nTileCont.name = $"Tile {i} {j}";
                 Tile nTile = nTileCont.GetComponentInChildren<Tile>();
                 nTile.tileX = i;

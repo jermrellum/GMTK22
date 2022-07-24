@@ -167,18 +167,22 @@ public class WaterSource : MonoBehaviour
 
             return half;
         }
+        else if(gval == 6)
+        {
+            return 0;
+        }
         else //flowing into construct
         {
             Construct constr = tilego.GetComponentInChildren<Construct>();
             constr.currentHP -= half;
             if(constr.currentHP > 0)
             {
-                constr.calcHealth();
+                constr.CalcHealth();
                 return 0;
             }
             else
             {
-                constr.destroyThisConstruct();
+                constr.DestroyThisConstruct();
                 return half;
             }
         }

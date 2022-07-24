@@ -228,8 +228,9 @@ GameObject:
   - component: {fileID: 701389280}
   - component: {fileID: 701389282}
   - component: {fileID: 701389281}
+  - component: {fileID: 701389283}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Game HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,6 +298,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701389279}
   m_CullTransparentMesh: 1
+--- !u!114 &701389283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701389279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0f6fe58b0a5fc44acce7393e3e9af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &740053836
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,8 +345,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -126.3, y: -37.1}
-  m_SizeDelta: {x: 240.68219, y: 45.615906}
+  m_AnchoredPosition: {x: -149.9, y: -27}
+  m_SizeDelta: {x: 282.8328, y: 44.282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &740053838
 MonoBehaviour:
@@ -356,13 +369,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: b1312a699c85b324aafb1be4191ff5b7, type: 3}
+    m_FontSize: 42
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 58
-    m_Alignment: 0
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -474,7 +487,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 330b93781d5a23c46b1b33915f90e070, type: 2}
+  - {fileID: 2100000, guid: 2746cd15737b7da4ba98c74dbf27431c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -554,8 +567,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.00005340576, y: -0.000009536743}
+  m_SizeDelta: {x: 0.000091553, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &899550894
 MonoBehaviour:
@@ -578,11 +591,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: b1312a699c85b324aafb1be4191ff5b7, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -734,6 +747,10 @@ MonoBehaviour:
   ticksBRCounter: 0
   contextMenuShowing: 0
   hoveringOnButton: 0
+  firstFrameConstructContext: 0
+  onlyHpDisp: 0
+  isTileContext: 0
+  difficulty: 0
 --- !u!1 &1040544030
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,8 +1015,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -9.8922, y: -47.6}
-  m_SizeDelta: {x: 140.2157, y: 65.2677}
+  m_AnchoredPosition: {x: -0.00001049, y: -33.148}
+  m_SizeDelta: {x: 187.9143, y: 66.2969}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1416606755
 MonoBehaviour:
@@ -1022,13 +1039,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: b1312a699c85b324aafb1be4191ff5b7, type: 3}
+    m_FontSize: 63
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 86
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1078,8 +1095,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 66.10004, y: -46.1}
-  m_SizeDelta: {x: 107.2724, y: 60.94879}
+  m_AnchoredPosition: {x: 125.01, y: -26.34}
+  m_SizeDelta: {x: 206, y: 44.282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1575257163
 MonoBehaviour:
@@ -1102,13 +1119,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: b1312a699c85b324aafb1be4191ff5b7, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
+    m_MinSize: 5
+    m_MaxSize: 50
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1225,9 +1242,11 @@ MonoBehaviour:
   borderBottom: -8.199996
   borderLeft: 3
   borderRight: 74
-  borderTop: 43
+  borderTop: 30
   zoomMax: 40
   zoomMin: 3
+  camConst: 10
+  cursorTexture: {fileID: 2800000, guid: 10acc4515ecc5eb4087f6016978516d1, type: 3}
 --- !u!1 &1731646652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,6 +1284,11 @@ MonoBehaviour:
   initialHousesToPlace: 20
   houseTileBufferFromSides: 2
   waterTicksToFlood: 10
+  tileMats:
+  - {fileID: 2100000, guid: 9b146800b25004541ac78921be7bfd03, type: 2}
+  - {fileID: 2100000, guid: e2916d5d42fca724383e27ed7cb7f4d6, type: 2}
+  - {fileID: 2100000, guid: d3d9f458d8ee5fa4b95be5ffdb896e2b, type: 2}
+  - {fileID: 2100000, guid: 21682c2fec3317a45b05b15999f25343, type: 2}
   framesPerWaterTick: 20
   tileSize: 2
 --- !u!4 &1731646654
@@ -1320,8 +1344,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -72.3, y: 28.1}
-  m_SizeDelta: {x: 111.7189, y: 28.363403}
+  m_AnchoredPosition: {x: -61.12921, y: 33.46167}
+  m_SizeDelta: {x: 89.3771, y: 43.199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2005347582
 MonoBehaviour:
