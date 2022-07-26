@@ -55,6 +55,13 @@ public class Construct : MonoBehaviour
         currentHP = useMaxHP;
     }
 
+    private float CalcScreenProp()
+    {
+        int sh = Screen.height;
+
+        return ((float)sh / 547.0f);
+    }
+
     private void OnMouseEnter()
     {
         if (gc.IsInMenu() && gc.isDay)
@@ -88,10 +95,12 @@ public class Construct : MonoBehaviour
 
             hudPan.SetCons(this);
 
+            float screenProp = CalcScreenProp();
+
             GameObject conHealthGo = Instantiate(conHealthFabText, hud.transform, false);
             Text chText = conHealthGo.GetComponentInChildren<Text>();
             chText.text = "HP: " + currentHP + " / " + useMaxHP;
-            conHealthGo.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + 25, 0);
+            conHealthGo.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + 25 * screenProp, 0);
 
             if (buildType != 5)
             {
@@ -120,7 +129,7 @@ public class Construct : MonoBehaviour
                 GameObject cbGo = Instantiate(constructButtonFab, hud.transform, false);
                 Text cbText = cbGo.GetComponentInChildren<Text>();
                 cbText.text = "Repair $" + GetRepairCost();
-                cbGo.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y - 30, 0);
+                cbGo.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y - 30 * screenProp, 0);
                 gc.onlyHpDisp = false;
                 ConstructButton cbco = cbGo.GetComponent<ConstructButton>();
                 cbco.buttonFunc = 1;

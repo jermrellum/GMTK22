@@ -38,8 +38,8 @@ public class CameraMovement : MonoBehaviour
     {
         startScrollSpeed = scrollSpeed;
 
-        sw = Screen.currentResolution.width;
-        sh = Screen.currentResolution.height;
+        sw = Screen.width;
+        sh = Screen.height;
     }
 
     private void ClickMove()
@@ -60,9 +60,9 @@ public class CameraMovement : MonoBehaviour
                 float mxDelta = (mouseX - prevMx) / sw;
                 float myDelta = (mouseY - prevMy) / sh;
 
-                this.transform.position = new Vector3(minMax(transform.position.x - mxDelta * moveSpeed * camConst, borderLeft, borderRight),
+                this.transform.position = new Vector3(minMax(transform.position.x - mxDelta * moveSpeed * camConst * 0.5f, borderLeft, borderRight),
                     transform.position.y,
-                    minMax(transform.position.z - myDelta * moveSpeed * camConst, borderBottom, borderTop));
+                    minMax(transform.position.z - myDelta * moveSpeed * camConst * 0.5f, borderBottom, borderTop));
             }
 
         }

@@ -1115,8 +1115,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "To play:\n\n- You lose when 0 houses remain\n- Build structures to protect
     houses from the flood\n- The flood comes from a random direction each night\n-
-    Each tall building generates $10 each day\n\ttimes the number of surviving houses\n-
-    Try to survive as many days as possible (go for 40!)\n- Harder hides the direction
+    Each tall building generates $10 each day\n\ttimes the surviving houses\n- Try
+    to survive as many days as possible (go for 40!)\n- Harder hides the direction
     the flood comes from\n- Easier doubles structure HP and gives you $250 daily"
 --- !u!222 &1199176525
 CanvasRenderer:
